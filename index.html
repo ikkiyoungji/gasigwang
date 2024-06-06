@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gasigwang</title>
+    
+    <style>
+        @font-face {
+            font-family: 'BookkMyungjo-Bd';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+      }
+        
+        div {
+            text-align: left;
+        }
+        
+        p {
+        font-family: 'BookkMyungjo-Bd';
+        font-size: 2rem;
+        }
+        
+        .highlight {
+            border-bottom: 2px solid black;
+            font-family: 'BookkMyungjo-Bd';
+            font-size: 2rem;
+        }
+    </style>
+</head>
+  
+<body>
+    <div>
+        <p>가시광은 <span class="highlight"></span>의 <span class="highlight"></span>를 <span class="highlight"></span>다.</p>
+        <p>그 <span class="highlight"></span>는 <span class="highlight"></span>거나 <span class="highlight"></span>거나 <span class="highlight"></span>하고 <span class="highlight"></span>할 것이다.</p>
+    </div>
+</body>
+  
+<script>
+    function getRandomColor() {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    const wordGroups = [
+        ["세상", "도서관", "가상", "희망", "집안", "인터넷", "욕실", "주방", "침실", "사람들", "소설 속", "밤", "침묵", "물", "말", "이야기"],
+        ["이야기", "축적", "가사", "질서", "가운데", "사연", "텍스트", "글", "단어", "회포", "소리", "말", "문장", "소음", "대화"],
+        ["듣는", "비춘", "좋아한", "뱉는", "나눈", "부른", "찾아낸", "노린", "찾는", "따라간", "서성인", "무너뜨린", "쫓는", "사랑한", "노래한", "모은"],
+        ["텍스트", "글", "말", "이야기", "사연", "가사", "노래", "소음", "회포", "대화", "문장", "시간", "침묵", "물", "훼방", "이야기"],
+        ["고여있", "괜찮", "귀신같", "느슨하", "리듬감이 느껴지", "무섭", "바쁘", "새롭", "슬프", "시시하", "신나", "어둡", "우연하", "웃기", "호방하", "흥미롭"],
+        ["서늘하", "편안하", "느리", "깊", "명쾌하", "빠르", "짜", "흘러가", "귀엽", "덥", "맵", "끝없", "상큼하", "좀스럽", "연결되", "밝"],
+        ["쫀쫀", "유행", "고리타분", "슴슴", "우울", "뭉클", "특이", "차분", "피곤", "어렵", "모호", "창피", "반짝", "무언가", "천천", "아이러니"],
+        ["관대", "궁금", "근사", "나아가게", "무의미", "비장", "새롭게", "선명", "어렴풋", "어색", "옹졸", "우스꽝스럽게", "이상", "지루", "충돌", "흉측"]
+    ];
+
+    function setRandomContent() {
+        document.body.style.backgroundColor = getRandomColor();
+        const highlights = document.querySelectorAll(".highlight");
+        highlights.forEach((highlight) => {
+            const wordGroup = wordGroups[Array.from(highlights).indexOf(highlight)];
+            const randomWord = wordGroup[Math.floor(Math.random() * wordGroup.length)];
+            highlight.textContent = randomWord;
+        });
+    }
+
+    window.onload = function() {
+        setRandomContent();
+
+        document.body.addEventListener("click", setRandomContent);
+    }
+</script>
+</html>
