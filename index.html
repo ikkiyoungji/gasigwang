@@ -176,6 +176,22 @@ function getURLForWord(word) {
 function openFrame(url) {
     const iframe = document.createElement('iframe');
     iframe.src = url;
+    iframe.draggable = true; // 드래그 가능하도록 설정
+
+    const closeButton = document.createElement('button');
+    closeButton.textContent = '닫기';
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '-20px';
+    closeButton.style.right = '-20px';
+    closeButton.addEventListener('click', () => {
+        iframe.remove();
+        closeButton.remove();
+    });
+
+    const iframeContainer = document.createElement('div');
+    iframeContainer.style.position = 'relative';
+    iframeContainer.appendChild(iframe);
+    iframeContainer.appendChild(closeButton);
 
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
@@ -185,12 +201,12 @@ function openFrame(url) {
     const randomLeft = Math.floor(Math.random() * (screenWidth - iframeWidth));
     const randomTop = Math.floor(Math.random() * (screenHeight - iframeHeight));
 
-    iframe.style.left = `${randomLeft}px`;
-    iframe.style.top = `${randomTop}px`;
-    iframe.style.position = 'fixed';
-    iframe.style.zIndex = '9999';
+    iframeContainer.style.left = `${randomLeft}px`;
+    iframeContainer.style.top = `${randomTop}px`;
+    iframeContainer.style.position = 'fixed';
+    iframeContainer.style.zIndex = '9999';
 
-    document.body.appendChild(iframe);
+    document.body.appendChild(iframeContainer);
 }
     
 function changeContent() {
