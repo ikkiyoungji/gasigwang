@@ -53,10 +53,10 @@
     </style>
 </head>
   
-<body onclick="changeContent()">
+<body>
     <div>
-        <p>가시광은 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>의 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>를 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>다.</p>
-        <p>그 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>는 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>거나 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>거나 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>하고 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>할 것이다.</p>
+        <p>가시광은 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>의 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>를 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>다.</p>
+        <p>그 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>는 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>하고 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>할 것이다.</p>
     </div>
 </body>
   
@@ -66,24 +66,6 @@
         const g = Math.floor(Math.random() * 256);
         const b = Math.floor(Math.random() * 256);
         return `rgb(${r}, ${g}, ${b})`;
-    }
-
-    function openFrame(url) {
-        const iframe = document.createElement('iframe');
-        iframe.src = url;
-
-        const screenWidth = window.screen.width;
-        const screenHeight = window.screen.height;
-        const iframeWidth = 400;
-        const iframeHeight = 300;
-
-        const randomLeft = Math.floor(Math.random() * (screenWidth - iframeWidth));
-        const randomTop = Math.floor(Math.random() * (screenHeight - iframeHeight));
-
-        iframe.style.left = `${randomLeft}px`;
-        iframe.style.top = `${randomTop}px`;
-
-        document.body.appendChild(iframe);
     }
 
       const wordGroups = [
@@ -161,7 +143,7 @@
     // ... 다른 wordGroup 객체들도 추가
 ];
 
-    function getURLForWord(word) {
+function getURLForWord(word) {
         for (const group of wordGroups) {
             if (group.urlMap.hasOwnProperty(word)) {
                 return group.urlMap[word];
@@ -170,6 +152,26 @@
         return "#";
     }
 
+function openFrame(url) {
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
+    const iframeWidth = 400;
+    const iframeHeight = 300;
+
+    const randomLeft = Math.floor(Math.random() * (screenWidth - iframeWidth));
+    const randomTop = Math.floor(Math.random() * (screenHeight - iframeHeight));
+
+    iframe.style.left = `${randomLeft}px`;
+    iframe.style.top = `${randomTop}px`;
+    iframe.style.position = 'fixed';
+    iframe.style.zIndex = '9999';
+
+    document.body.appendChild(iframe);
+}
+    
 function changeContent() {
         document.body.style.backgroundColor = getRandomColor();
         const highlights = document.querySelectorAll(".highlight");
@@ -181,6 +183,12 @@ function changeContent() {
             highlight.href = wordURL;
         });
     }
+    
+window.addEventListener('click', function(event) {
+    if (event.target === document.body) {
+        changeContent();
+    }
+});
 
     window.onload = changeContent;
 </script>
