@@ -50,25 +50,35 @@
             border: none;
         }
 
-    .bottom-image {
-    display: block;
-    width: 50%;
-    position: absolute;
-    bottom: 1rem;
-    left: 0;
-    right: 0;
-    margin: auto;
+    .content {
+        text-align: left;
     }
 
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .bottom-image {
+        max-width: 100%;
+        height: auto;
+    }
     </style>
 </head>
   
 <body>
-    <div>
-        <p>가시광은 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>의 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>를 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>다.</p>
-        <p>그 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>는 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>하고 <a href="#" class="highlight" onclick="openFrame(this.href); return false;">...</a>할 것이다.</p>
+    <div class="content">
+        <p>가시광은 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>의 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>를 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>다.</p>
+        <p>그 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>는 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>하고 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>할 것이다.</p>
     </div>
-<img src="weblogo.png" alt="이미지 설명" class="bottom-image">
+
+    <footer>
+        <img src="weblogo.png" alt="이미지 설명" class="bottom-image">
+    </footer>
 </body>
   
 <script>
