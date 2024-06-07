@@ -206,7 +206,7 @@ function changeContent() {
     }
     
 window.addEventListener('click', function(event) {
-    if (event.target === document.body) {
+    if (event.target === document.body || event.target.closest('footer')) {
         changeContent();
     }
 });
