@@ -53,7 +53,7 @@
     </style>
 </head>
   
-<body>
+<body onclick="changeContent()">
     <div>
         <p>가시광은 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>의 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>를 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>다.</p>
         <p>그 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>는 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>거나 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>거나 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>하고 <a href="#" class="highlight" onclick="openFrame(this.href); return false;"></a>할 것이다.</p>
@@ -96,7 +96,7 @@
       },
        
         {
-        words: ["축적"],
+        words: ["이야기"],
         urlMap: {
             "이야기": "https://example.com/story",
             "축적": "https://example.com/accumulation",
@@ -169,7 +169,7 @@
         return "#";
     }
 
-     window.onload = function() {
+function changeContent() {
         document.body.style.backgroundColor = getRandomColor();
         const highlights = document.querySelectorAll(".highlight");
         highlights.forEach((highlight) => {
@@ -180,5 +180,7 @@
             highlight.href = wordURL;
         });
     }
+
+    window.onload = changeContent;
 </script>
 </html>
