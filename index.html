@@ -42,6 +42,14 @@
         font-family: 'BookkMyungjo-Bd';
         font-size: 2rem;
       }
+      
+      iframe {
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            border: none;
+        }
+
     </style>
 </head>
   
@@ -60,31 +68,23 @@
         return `rgb(${r}, ${g}, ${b})`;
     }
 
-    function openPopup(url, link) {
-    const popupWidth = 400;
-    const popupHeight = 300;
+    function openFrame(url) {
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
 
-    const popup = window.open(
-        url,
-        '_blank',
-        `width=${popupWidth},height=${popupHeight},left=0,top=0`
-    );
+        const screenWidth = window.screen.width;
+        const screenHeight = window.screen.height;
+        const iframeWidth = 400;
+        const iframeHeight = 300;
 
-    if (popup) {
-        setTimeout(() => {
-            const screenWidth = window.screen.width;
-            const screenHeight = window.screen.height;
-            const randomLeft = Math.floor(Math.random() * (screenWidth - popupWidth));
-            const randomTop = Math.floor(Math.random() * (screenHeight - popupHeight));
+        const randomLeft = Math.floor(Math.random() * (screenWidth - iframeWidth));
+        const randomTop = Math.floor(Math.random() * (screenHeight - iframeHeight));
 
-            popup.resizeTo(popupWidth, popupHeight);
-            popup.moveTo(randomLeft, randomTop);
-            popup.focus();
-        }, 100);
-    } else {
-        link.target = '_blank';
+        iframe.style.left = `${randomLeft}px`;
+        iframe.style.top = `${randomTop}px`;
+
+        document.body.appendChild(iframe);
     }
-}
 
        const wordGroups = [
          {
