@@ -73,10 +73,11 @@
 </head>
   
 <body>
-    <div class="content">
-        <p>가시광은 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>의 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>를 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>다.</p>
-        <p>그 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>는 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>하고 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>할 것이다.</p>
-    </div>
+<div class="content">
+    <p>가시광은 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>의 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>를 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>다.</p>
+    <p>그 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>는 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>거나 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>하고 <a href="#" class="highlight" onclick="event.stopPropagation(); openFrame(this.href); return false;">...</a>할 것이다.</p>
+    <div id="iframe-container"></div>
+</div>
 
     <footer>
         <img src="weblogo.png" alt="이미지 설명" class="bottom-image">
@@ -196,9 +197,8 @@ function getURLForWord(word) {
     }
 
 function openFrame(url) {
-    const iframe = document.createElement('iframe');
-    iframe.src = url;
-    iframe.draggable = true; // 드래그 가능하도록 설정
+    const iframeContainer = document.createElement('div');
+    iframeContainer.style.position = 'relative';
 
     const closeButton = document.createElement('button');
     closeButton.textContent = '닫기';
@@ -228,7 +228,7 @@ function openFrame(url) {
     iframeContainer.style.position = 'fixed';
     iframeContainer.style.zIndex = '9999';
 
-    document.body.appendChild(iframeContainer);
+    document.getElementById('iframe-container').appendChild(iframeContainer);
 }
     
 function changeContent() {
