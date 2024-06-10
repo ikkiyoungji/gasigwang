@@ -196,18 +196,9 @@ function getURLForWord(word) {
     }
 
 function openFrame(url) {
-    const iframeContainer = document.createElement('div');
-    iframeContainer.style.position = 'relative';
-
     const iframe = document.createElement('iframe');
     iframe.src = url;
-    iframe.draggable = true;
-    iframe.style.position = 'absolute';
-    iframe.style.width = '400px';
-    iframe.style.height = '300px';
-    iframe.style.border = 'none';
-    iframe.style.padding = '2rem';
-    iframe.style.overflow = 'scroll';
+    iframe.draggable = true; // 드래그 가능하도록 설정
 
     const closeButton = document.createElement('button');
     closeButton.textContent = '닫기';
@@ -215,9 +206,12 @@ function openFrame(url) {
     closeButton.style.top = '-20px';
     closeButton.style.right = '-20px';
     closeButton.addEventListener('click', () => {
-        iframeContainer.remove();
+        iframe.remove();
+        closeButton.remove();
     });
 
+    const iframeContainer = document.createElement('div');
+    iframeContainer.style.position = 'relative';
     iframeContainer.appendChild(iframe);
     iframeContainer.appendChild(closeButton);
 
@@ -231,11 +225,12 @@ function openFrame(url) {
 
     iframeContainer.style.left = `${randomLeft}px`;
     iframeContainer.style.top = `${randomTop}px`;
+    iframeContainer.style.position = 'fixed';
     iframeContainer.style.zIndex = '9999';
 
     document.body.appendChild(iframeContainer);
 }
-
+    
 function changeContent() {
         document.body.style.backgroundColor = getRandomColor();
         const highlights = document.querySelectorAll(".highlight");
