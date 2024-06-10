@@ -1,0 +1,28 @@
+    @font-face {
+    font-family: 'BookkMyungjo-Bd';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    }
+    
+    body {
+        display: flex;
+        margin: 0;
+      }
+        
+     div {
+        padding: 1rem;
+        text-align: left;
+      }
+        
+      p {
+        font-family: 'BookkMyungjo-Bd';
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+        
+      .highlight {
+        border-bottom: 2px solid black;
+        font-family: 'BookkMyungjo-Bd';
+        font-size: 1rem;
+      }
