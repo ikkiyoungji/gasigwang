@@ -197,9 +197,17 @@ function getURLForWord(word) {
     }
 
 function openFrame(url) {
+    const iframeContainer = document.createElement('div');
+    iframeContainer.style.position = 'absolute';
+
     const iframe = document.createElement('iframe');
     iframe.src = url;
-    iframe.draggable = true; // 드래그 가능하도록 설정
+    iframe.draggable = true;
+    iframe.style.width = '400px';
+    iframe.style.height = '300px';
+    iframe.style.border = 'none';
+    iframe.style.padding = '2rem';
+    iframe.style.overflow = 'scroll';
 
     const closeButton = document.createElement('button');
     closeButton.textContent = '닫기';
@@ -207,12 +215,9 @@ function openFrame(url) {
     closeButton.style.top = '-20px';
     closeButton.style.right = '-20px';
     closeButton.addEventListener('click', () => {
-        iframe.remove();
-        closeButton.remove();
+        iframeContainer.remove();
     });
 
-    const iframeContainer = document.createElement('div');
-    iframeContainer.style.position = 'relative';
     iframeContainer.appendChild(iframe);
     iframeContainer.appendChild(closeButton);
 
@@ -226,7 +231,6 @@ function openFrame(url) {
 
     iframeContainer.style.left = `${randomLeft}px`;
     iframeContainer.style.top = `${randomTop}px`;
-    iframeContainer.style.position = 'fixed';
     iframeContainer.style.zIndex = '9999';
 
     document.body.appendChild(iframeContainer);
@@ -243,7 +247,59 @@ function changeContent() {
             highlight.href = wordURL;
         });
     }
-    
+
+let isDragging = false;
+let currentX;
+let currentY;
+let initialX;
+let initialY;
+let xOffset = 0;
+let yOffset = 0;
+
+const iframeContainers = [];
+
+document.querySelectorAll('div[style*="position: absolute"]').forEach(container => {
+    iframeContainers.push(container);
+
+    container.addEventListener('mousedown', dragStart);
+    container.addEventListener('mouseup', dragEnd);
+    container.addEventListener('mousemove', drag);
+});
+
+function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+
+    if (e.target === e.currentTarget) {
+        isDragging = true;
+    }
+}
+
+function dragEnd(e) {
+    initialX = currentX;
+    initialY = currentY;
+
+    isDragging = false;
+}
+
+function drag(e) {
+    if (isDragging) {
+        e.preventDefault();
+
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+
+        xOffset = currentX;
+        yOffset = currentY;
+
+        setTranslate(currentX, currentY, e.currentTarget);
+    }
+}
+
+function setTranslate(xPos, yPos, el) {
+    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+}
+
 window.addEventListener('click', function(event) {
     if (event.target === document.body || event.target.closest('footer')) {
         changeContent();
