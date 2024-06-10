@@ -197,8 +197,9 @@ function getURLForWord(word) {
     }
 
 function openFrame(url) {
-    const iframeContainer = document.createElement('div');
-    iframeContainer.style.position = 'relative';
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.draggable = true; // 드래그 가능하도록 설정
 
     const closeButton = document.createElement('button');
     closeButton.textContent = '닫기';
@@ -228,7 +229,7 @@ function openFrame(url) {
     iframeContainer.style.position = 'fixed';
     iframeContainer.style.zIndex = '9999';
 
-    document.getElementById('iframe-container').appendChild(iframeContainer);
+    document.body.appendChild(iframeContainer);
 }
     
 function changeContent() {
